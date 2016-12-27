@@ -3,18 +3,15 @@ package com.mirhoseini.marvel.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.mirhoseini.marvel.ApplicationComponent;
-import com.mirhoseini.marvel.BR;
 import com.mirhoseini.marvel.R;
 import com.mirhoseini.marvel.base.BaseActivity;
 import com.mirhoseini.marvel.database.model.CharacterModel;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import com.mirhoseini.marvel.databinding.ActivityCharacterBinding;
 import timber.log.Timber;
 
 public class CharacterActivity extends BaseActivity {
@@ -34,7 +31,8 @@ public class CharacterActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ViewDataBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_character);
+        // binding is named after layout
+        ActivityCharacterBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_character);
 
         // inject views using ButterKnife
         ButterKnife.bind(this);
@@ -48,7 +46,8 @@ public class CharacterActivity extends BaseActivity {
         CharacterModel character = (CharacterModel) getIntent().getExtras().getSerializable(ARG_CHARACTER);
 
         // bind value using Android Binding
-        binding.setVariable(BR.character, character);
+//        binding.setVariable(BR.character, character);
+        binding.setCharacter(character);
 
         setupToolbar(character.getName());
 
